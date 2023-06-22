@@ -8,12 +8,12 @@ public class SplayTree {
         this.root = new BTNode(data);
     }
 
-    public int search(BTNode root ,int data){
+    public boolean search(int data){
         if(root == null) throw new IllegalStateException("root cannot be null");
         if(root.data == data);
         if(root.data > data);
         if(root.data < data);
-        return 0;
+        return false;
 
         
         
@@ -25,6 +25,8 @@ public class SplayTree {
     public void insert(int data){}
 
     public void remove(int data){}
+
+    public void sum(int start, int end){}
 
 
 }
