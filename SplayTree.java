@@ -5,5 +5,11 @@ public class SplayTree<T> {
     public SplayTree(T data) {
         this.root = new BTNode<T>(data);
     }
+    public void search(T data){}
+
+    public void insert(T data){}
+
+    public void remove(T data){}
+
 
 }
