@@ -1,11 +1,11 @@
 package SplayTree_DS_finalProject;
 
-class BTNode<T> {
-    T data;
-    BTNode<T> rightChild;
-    BTNode<T> leftChild;
+class BTNode {
+    int data;
+    BTNode rightChild;
+    BTNode leftChild;
 
-    public BTNode(T data) {
+    public BTNode(int data) {
         this.data = data;
     }
 
