@@ -1,15 +1,30 @@
 package SplayTree_DS_finalProject;
-public class SplayTree<T> {
-    public BTNode<T> root;
 
-    public SplayTree(T data) {
-        this.root = new BTNode<T>(data);
+
+public class SplayTree {
+    public BTNode root;
+
+    public SplayTree(int data) {
+        this.root = new BTNode(data);
     }
-    public void search(T data){}
 
-    public void insert(T data){}
+    public int search(BTNode root ,int data){
+        if(root == null) throw new IllegalStateException("root cannot be null");
+        if(root.data == data);
+        if(root.data > data);
+        if(root.data < data);
+        return 0;
 
-    public void remove(T data){}
+        
+        
+        
+           
+        
+    }
+
+    public void insert(int data){}
+
+    public void remove(int data){}
 
 
 }
