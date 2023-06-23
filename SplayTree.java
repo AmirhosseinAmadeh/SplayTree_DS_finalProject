@@ -1,10 +1,11 @@
 package SplayTree_DS_finalProject;
 
+import java.util.Scanner;
+
 public class SplayTree {
     public BTNode root;
 
-    public SplayTree(int data) {
-        this.root = new BTNode(data);
+    public SplayTree() {
     }
 
     public boolean search(int data) {
@@ -193,4 +194,44 @@ public class SplayTree {
         return sum;
     }
 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int orderNum = sc.nextInt();
+        String[] order = sc.nextLine().split("");
+
+        SplayTree tree = new SplayTree();
+        int data;
+
+        for (int i = 0; i < orderNum; i++) {
+            switch (order[0]) {
+                case "add":
+                    data = Integer.parseInt(order[1]);
+                    tree.insert(data);
+
+                    break;
+                case "del":
+                    data = Integer.parseInt(order[1]);
+                    tree.remove(data);
+
+                    break;
+
+                case "find":
+                    data = Integer.parseInt(order[1]);
+                    System.out.println(tree.search(data));
+
+                    break;
+
+                case "sum":
+                    int s = Integer.parseInt(order[1]);
+                    int e = Integer.parseInt(order[2]);
+                    System.out.println(tree.sum(s, e));
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        sc.close();
+    }
 }
