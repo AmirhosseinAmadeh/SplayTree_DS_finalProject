@@ -3,12 +3,11 @@ package SplayTree_DS_finalProject;
 import java.util.Scanner;
 
 public class SplayTree {
-    public BTNode root;
-
-    public SplayTree() {
-    }
+    private BTNode root;
 
     public boolean search(int data) {
+        if (root == null)
+            return false;
         BTNode node = findNode(data);
         if (node != null) {
             splay(node);
@@ -197,12 +196,13 @@ public class SplayTree {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int orderNum = sc.nextInt();
-        String[] order = sc.nextLine().split("");
 
         SplayTree tree = new SplayTree();
         int data;
 
-        for (int i = 0; i < orderNum; i++) {
+        for (int i = 0; i <= orderNum; i++) {
+            String[] order = sc.nextLine().split(" ");
+            // System.out.println(order[0]);
             switch (order[0]) {
                 case "add":
                     data = Integer.parseInt(order[1]);
@@ -234,4 +234,16 @@ public class SplayTree {
 
         sc.close();
     }
+}
+
+class BTNode {
+    int data;
+    BTNode parent;
+    BTNode rightChild;
+    BTNode leftChild;
+
+    public BTNode(int data) {
+        this.data = data;
+    }
+
 }
