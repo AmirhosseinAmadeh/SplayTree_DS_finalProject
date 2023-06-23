@@ -142,24 +142,27 @@ public class SplayTree {
         if (nodeToRemove == null)
             return; // The node doesn't exist in the tree
 
-        //splay(nodeToRemove);
-
-        if (nodeToRemove.leftChild == null)
-            transPlant(nodeToRemove, nodeToRemove.rightChild);
-        else if (nodeToRemove.rightChild == null)
-            transPlant(nodeToRemove, nodeToRemove.leftChild);
         else {
-            BTNode minRight = minimum(nodeToRemove.rightChild);
 
-            if (minRight.parent != nodeToRemove) {
-                transPlant(minRight, minRight.rightChild);
-                minRight.rightChild = nodeToRemove.rightChild;
-                minRight.rightChild.parent = minRight;
+            if (nodeToRemove.leftChild == null)
+                transPlant(nodeToRemove, nodeToRemove.rightChild);
+            else if (nodeToRemove.rightChild == null)
+                transPlant(nodeToRemove, nodeToRemove.leftChild);
+            else {
+                BTNode minRight = minimum(nodeToRemove.rightChild);
+
+                if (minRight.parent != nodeToRemove) {
+                    transPlant(minRight, minRight.rightChild);
+                    minRight.rightChild = nodeToRemove.rightChild;
+                    minRight.rightChild.parent = minRight;
+                }
+
+                transPlant(nodeToRemove, minRight);
+                minRight.leftChild = nodeToRemove.leftChild;
+                minRight.leftChild.parent = minRight;
             }
-
-            transPlant(nodeToRemove, minRight);
-            minRight.leftChild = nodeToRemove.leftChild;
-            minRight.leftChild.parent = minRight;
+            if (nodeToRemove.parent != null)
+                splay(nodeToRemove.parent);
         }
     }
 
