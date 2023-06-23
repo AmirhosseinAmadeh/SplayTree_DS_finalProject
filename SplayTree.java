@@ -1,5 +1,6 @@
 package SplayTree_DS_finalProject;
 
+import org.w3c.dom.Node;
 
 public class SplayTree {
     public BTNode root;
@@ -82,7 +83,24 @@ public class SplayTree {
         root = x;
     }
 
-    private void rotateLeft(BTNode parent) {
+    private void rotateLeft(BTNode x) {
+        BTNode y = x.rightChild;
+        x.rightChild = y.leftChild;
+
+        if (y.leftChild != null)
+            y.leftChild.parent = x;
+
+        y.parent = x.parent;
+
+        if (x.parent == null)
+            root = y;
+        else if (x == x.parent.leftChild)
+            x.parent.leftChild = y;
+        else
+            x.parent.rightChild = y;
+
+        y.leftChild = x;
+        x.parent = y;
     }
 
     private void rotateRight(BTNode parent) {
