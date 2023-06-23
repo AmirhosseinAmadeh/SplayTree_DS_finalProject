@@ -1,6 +1,5 @@
 package SplayTree_DS_finalProject;
 
-
 public class SplayTree {
     public BTNode root;
 
@@ -184,7 +183,14 @@ public class SplayTree {
             newNode.parent = oldNode.parent;
     }
 
-    public void sum(int start, int end) {
+    public int sum(int start, int end) {
+        int sum = 0;
+        for (int i = start; i <= end; i++) {
+            BTNode nodeToAdd = findNode(i);
+            if (nodeToAdd != null)
+                sum += nodeToAdd.data;
+        }
+        return sum;
     }
 
 }
