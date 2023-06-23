@@ -10,17 +10,29 @@ public class SplayTree {
     }
 
     public boolean search(int data) {
-        if (root == null)
-            throw new IllegalStateException("root cannot be null");
-        if (root.data == data)
-            ;
-        if (root.data > data)
-            ;
-        if (root.data < data)
-            ;
-        return false;
-
+        return findNode(data) != null;
     }
+
+
+    private BTNode findNode(int data) {
+        BTNode x = root;
+        if (data == x.data)
+            return x;
+
+        while (x != null) {
+            if (data < x.data)
+                x = x.leftChild;
+            else if (data > x.data)
+                x = x.rightChild;
+            else {
+                splay(x);
+                return x;
+            }
+        }
+
+        return null;
+    }
+
 
     public void insert(int data) {
         BTNode newNode = new BTNode(data);
