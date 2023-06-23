@@ -10,9 +10,13 @@ public class SplayTree {
     }
 
     public boolean search(int data) {
-        return findNode(data) != null;
+        BTNode node = findNode(data);
+        if (node != null) {
+            splay(node);
+            return true;
+        }
+        return false;
     }
-
 
     private BTNode findNode(int data) {
         BTNode x = root;
@@ -24,15 +28,13 @@ public class SplayTree {
                 x = x.leftChild;
             else if (data > x.data)
                 x = x.rightChild;
-            else {
-                splay(x);
+            else
                 return x;
-            }
+
         }
 
         return null;
     }
-
 
     public void insert(int data) {
         BTNode newNode = new BTNode(data);
