@@ -1,11 +1,15 @@
 package SplayTree_DS_finalProject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class SplayTree {
-    private BTNode root;
+    private BTNode root = null;
+    int size = 0;
 
-    public boolean search(int data) {
+    public boolean search(Long data) {
         if (root == null)
             return false;
         BTNode node = findNode(data);
@@ -16,7 +20,7 @@ public class SplayTree {
         return false;
     }
 
-    private BTNode findNode(int data) {
+    private BTNode findNode(Long data) {
         BTNode x = root;
         if (data == x.data)
             return x;
@@ -34,7 +38,7 @@ public class SplayTree {
         return null;
     }
 
-    public void insert(int data) {
+    public void insert(long data) {
         BTNode newNode = new BTNode(data);
         BTNode y = null;
         BTNode x = root;
@@ -45,8 +49,10 @@ public class SplayTree {
                 x = x.leftChild;
             else if (data > x.data)
                 x = x.rightChild;
-            else
-                return; // The node already exists, no duplicates allowed
+            else {
+                splay(x);
+                return;
+            } // The node already exists
         }
 
         newNode.parent = y;
@@ -59,6 +65,7 @@ public class SplayTree {
             y.rightChild = newNode;
 
         splay(newNode);
+        size++;
     }
 
     private void splay(BTNode x) {
@@ -76,12 +83,12 @@ public class SplayTree {
                     if (parent == grandParent.leftChild) {// zig-zig
                         rotateRight(grandParent);
                         rotateRight(parent);
-                    } else {//zig-zag
+                    } else {// zig-zag
                         rotateRight(parent);
                         rotateLeft(grandParent);
                     }
-                } else {//x == parent.rightChild
-                    if (parent == grandParent.leftChild) {//zig-zag
+                } else {// x == parent.rightChild
+                    if (parent == grandParent.leftChild) {// zig-zag
                         rotateLeft(parent);
                         rotateRight(grandParent);
                     } else {// zig-zig
@@ -135,7 +142,7 @@ public class SplayTree {
         x.parent = y;
     }
 
-    public void remove(int data) {
+    public void remove(long data) {
         BTNode nodeToRemove = findNode(data);
         if (nodeToRemove == null)
             return; // The node doesn't exist in the tree
@@ -161,6 +168,7 @@ public class SplayTree {
             }
             if (nodeToRemove.parent != null)
                 splay(nodeToRemove.parent);
+            size--;
         }
     }
 
@@ -169,6 +177,10 @@ public class SplayTree {
             x = x.leftChild;
 
         return x;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     private void transPlant(BTNode oldNode, BTNode newNode) {
@@ -183,48 +195,68 @@ public class SplayTree {
             newNode.parent = oldNode.parent;
     }
 
-    public int sum(int start, int end) {
-        int sum = 0;
-        for (int i = start; i <= end; i++) {
-            BTNode nodeToAdd = findNode(i);
-            if (nodeToAdd != null)
-                sum += nodeToAdd.data;
+    public long sum(Long l, Long r) {
+        return sum(l, r, root);
+    }
+
+    public long sum(Long l, Long r, BTNode node) {
+        long sum = 0;
+        if (node == null)
+            return 0;
+        if (node.data >= l && node.data <= r) {
+            sum += node.data;
+            sum += sum(l, r, node.leftChild);
+            sum += sum(l, r, node.rightChild);
+        } else if (node.data >= r) {
+            sum += sum(l, r, node.leftChild);
+        } else if (node.data <= l) {
+            sum += sum(l, r, node.rightChild);
         }
+
         return sum;
     }
 
+
     public static void main(String[] args) {
+        try {
+            System.setIn(new FileInputStream("C:\\Users\\Legion\\Desktop\\Program\\__JAVA__\\n" + //
+                    "ext\\DS\\Finalproj\\SplayTree_DS_finalProject\\Test\\input25.txt"));
+            System.setOut(new PrintStream(new FileOutputStream("your-output.txt")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         int orderNum = sc.nextInt();
 
         SplayTree tree = new SplayTree();
-        int data;
+        long data;
 
         for (int i = 0; i <= orderNum; i++) {
             String[] order = sc.nextLine().split(" ");
             // System.out.println(order[0]);
             switch (order[0]) {
                 case "add":
-                    data = Integer.parseInt(order[1]);
+                    data = Long.parseLong(order[1]);
                     tree.insert(data);
 
                     break;
                 case "del":
-                    data = Integer.parseInt(order[1]);
+                    data = Long.parseLong(order[1]);
                     tree.remove(data);
 
                     break;
 
                 case "find":
-                    data = Integer.parseInt(order[1]);
+                    data = Long.parseLong(order[1]);
                     System.out.println(tree.search(data));
 
                     break;
 
                 case "sum":
-                    int s = Integer.parseInt(order[1]);
-                    int e = Integer.parseInt(order[2]);
-                    System.out.println(tree.sum(s, e));
+                    Long l = Long.parseLong(order[1]);
+                    Long r = Long.parseLong(order[2]);
+                    System.out.println(tree.sum(l, r));
                     break;
 
                 default:
@@ -234,15 +266,16 @@ public class SplayTree {
 
         sc.close();
     }
+
 }
 
 class BTNode {
-    int data;
+    long data;
     BTNode parent;
     BTNode rightChild;
     BTNode leftChild;
 
-    public BTNode(int data) {
+    public BTNode(long data) {
         this.data = data;
     }
 
