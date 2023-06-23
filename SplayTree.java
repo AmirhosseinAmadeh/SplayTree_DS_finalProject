@@ -66,25 +66,25 @@ public class SplayTree {
             BTNode parent = x.parent;
             BTNode grandParent = parent.parent;
 
-            if (grandParent == null) {
+            if (grandParent == null) {// zig
                 if (x == parent.leftChild)
                     rotateRight(parent);
                 else
                     rotateLeft(parent);
             } else {
                 if (x == parent.leftChild) {
-                    if (parent == grandParent.leftChild) {
+                    if (parent == grandParent.leftChild) {// zig-zig
                         rotateRight(grandParent);
                         rotateRight(parent);
-                    } else {
+                    } else {//zig-zag
                         rotateRight(parent);
                         rotateLeft(grandParent);
                     }
-                } else {
-                    if (parent == grandParent.leftChild) {
+                } else {//x == parent.rightChild
+                    if (parent == grandParent.leftChild) {//zig-zag
                         rotateLeft(parent);
                         rotateRight(grandParent);
-                    } else {
+                    } else {// zig-zig
                         rotateLeft(grandParent);
                         rotateLeft(parent);
                     }
