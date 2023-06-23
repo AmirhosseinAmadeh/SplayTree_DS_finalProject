@@ -1,6 +1,5 @@
 package SplayTree_DS_finalProject;
 
-import org.w3c.dom.Node;
 
 public class SplayTree {
     public BTNode root;
@@ -166,11 +165,23 @@ public class SplayTree {
         }
     }
 
-    private BTNode minimum(BTNode rightChild) {
-        return null;
+    private BTNode minimum(BTNode x) {
+        while (x.leftChild != null)
+            x = x.leftChild;
+
+        return x;
     }
 
-    private void transPlant(BTNode nodeToRemove, BTNode minRight) {
+    private void transPlant(BTNode oldNode, BTNode newNode) {
+        if (oldNode.parent == null)
+            root = newNode;
+        else if (oldNode == oldNode.parent.leftChild)
+            oldNode.parent.leftChild = newNode;
+        else
+            oldNode.parent.rightChild = newNode;
+
+        if (newNode != null)
+            newNode.parent = oldNode.parent;
     }
 
     public void sum(int start, int end) {
