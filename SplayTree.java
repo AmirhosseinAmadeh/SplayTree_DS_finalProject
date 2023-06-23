@@ -103,7 +103,24 @@ public class SplayTree {
         x.parent = y;
     }
 
-    private void rotateRight(BTNode parent) {
+    private void rotateRight(BTNode x) {
+        BTNode y = x.leftChild;
+        x.leftChild = y.rightChild;
+
+        if (y.rightChild != null)
+            y.rightChild.parent = x;
+
+        y.parent = x.parent;
+
+        if (x.parent == null)
+            root = y;
+        else if (x == x.parent.leftChild)
+            x.parent.leftChild = y;
+        else
+            x.parent.rightChild = y;
+
+        y.rightChild = x;
+        x.parent = y;
     }
 
     public void remove(int data) {
