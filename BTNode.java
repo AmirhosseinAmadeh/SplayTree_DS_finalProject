@@ -1,13 +1,12 @@
 package SplayTree_DS_finalProject;
 
 class BTNode {
-    int data;
+    long data;
     BTNode parent;
     BTNode rightChild;
     BTNode leftChild;
 
-    public BTNode(int data) {
+    public BTNode(long data) {
         this.data = data;
     }
-
 }
