@@ -1,6 +1,6 @@
 package SplayTree_DS_finalProject;
 
-class SplayTree {
+public class SplayTree {
     private BTNode root = null;
     int size = 0;
 
