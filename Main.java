@@ -1,5 +1,4 @@
 package SplayTree_DS_finalProject;
-
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +15,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int orderNum = sc.nextInt();
 
+        //SplayTree tree1 = new SplayTree();
         SplayTree tree = new SplayTree();
         long data;
 

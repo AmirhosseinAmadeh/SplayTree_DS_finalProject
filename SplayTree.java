@@ -4,6 +4,8 @@ public class SplayTree {
     private BTNode root = null;
     int size = 0;
 
+    
+
     public boolean search(Long data) {
         if (root == null)
             return false;
