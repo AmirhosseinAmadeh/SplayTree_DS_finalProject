@@ -6,6 +6,10 @@ public class SplayTree {
 
     
 
+    public BTNode getRoot() {
+        return root;
+    }
+
     public boolean search(Long data) {
         if (root == null)
             return false;
