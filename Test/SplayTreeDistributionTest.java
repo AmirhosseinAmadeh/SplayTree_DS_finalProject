@@ -1,6 +1,8 @@
 package SplayTree_DS_finalProject.Test;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import SplayTree_DS_finalProject.SplayTree;
 import SplayTree_DS_finalProject.BTNode;
@@ -21,11 +23,14 @@ public class SplayTreeDistributionTest {
     private static SplayTree buildTreeWithUniformDistribution() {
         SplayTree splayTree = new SplayTree();
         Random random = new Random();
+        Set<Integer> randomSet = new HashSet<Integer>();
 
         // Insert 100 elements with uniform distribution
         for (int i = 0; i < 100; i++) {
             int value = random.nextInt(1000); // Generate random value between 0 and 999
             splayTree.insert(value);
+            randomSet.add(value);
+            //splayTree.search(randomSet.toArray()[0]);
         }
 
         return splayTree;

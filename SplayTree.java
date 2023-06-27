@@ -146,6 +146,8 @@ public class SplayTree {
     }
 
     public void remove(long data) {
+        if (root == null)
+            return;
         BTNode nodeToRemove = findNode(data);
         if (nodeToRemove == null)
             return; // The node doesn't exist in the tree
