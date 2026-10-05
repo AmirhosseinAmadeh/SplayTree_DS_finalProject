@@ -1,2 +1,5 @@
-BTNode.class
-SplayTree.class
+out/
+build/
+*.class
+.idea/
+.vscode/
